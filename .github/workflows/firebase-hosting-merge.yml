@@ -17,16 +17,18 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16.16.0'
-      - name: Install Angular CLI and Dependencies
+      - name: Install Angular CLI
         run: npm install -g @angular/cli
 
-      - uses: actions/checkout@v2
-      - name: Run Tests
-        run: ng test -- --watch=false --browsers=ChromeHeadless
+      - name: Install Dependencies and Run Tests
+        run: |
+          npm ci --force
+          ng test -- --watch=false --browsers=ChromeHeadless
 
   deploy:
     needs: test
