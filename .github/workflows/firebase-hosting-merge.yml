@@ -21,10 +21,10 @@ jobs:
       - name: Install Dependencies and Run Tests
         run: |
           npm ci --force
-          ng test -- --watch=false --browsers=ChromeHeadless
+          ng test --watch=false --browsers=ChromeHeadless
 
   deploy:
-    needs: test
+    needs: build_and_test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
