@@ -8,10 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: Install Dependencies
-          run: npm ci --force && npm run build --force
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm ci --force && npm run build --force
 
   test:
     runs-on: ubuntu-latest
