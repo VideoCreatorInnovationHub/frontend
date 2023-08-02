@@ -6,29 +6,25 @@ on:
       - main
 
 jobs:
-  build_and_test:
+  build:
+    runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Install Dependencies
+          run: npm ci --force && npm run build --force
+
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
-
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
-
-      - name: Install Dependencies and Run Tests
-        run: |
-          npm ci --force
-          ng test -- --watch=false --browsers=ChromeHeadless
+      - name: Run Tests
+        run: ng test -- --watch=false --browsers=ChromeHeadless
 
   deploy:
-    needs: build_and_test
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci --force && npm run build --force
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
