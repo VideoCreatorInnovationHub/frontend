@@ -1,0 +1,19 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+
+.brand-logo {
+  font-family: 'Righteous', cursive;
+  font-size: 1.5rem;
+}
+
+nav ul a {
+  text-decoration: none;
+  margin-left: 2rem;
+  color: var(--text-color);
+  font-weight: bold;
+}
