@@ -14,8 +14,16 @@ jobs:
         run: npm ci --force && npm run build --force
 
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - name: Install Angular CLI and Dependencies
+        run: npm install -g @angular/cli
+
       - uses: actions/checkout@v2
       - name: Run Tests
         run: ng test -- --watch=false --browsers=ChromeHeadless
