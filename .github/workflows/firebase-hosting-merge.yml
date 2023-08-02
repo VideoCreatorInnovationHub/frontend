@@ -21,7 +21,7 @@ jobs:
       - name: Install Dependencies and Run Tests
         run: |
           npm ci --force
-          ng test --browsers=ChromeHeadlessNoSandbox --watch=false
+          ng test --watch=false
 
   deploy:
     needs: build_and_test
