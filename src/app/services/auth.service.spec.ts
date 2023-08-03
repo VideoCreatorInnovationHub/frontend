@@ -31,7 +31,7 @@ describe('AuthService', () => {
   describe('signup', () => {
     it('should send a POST request with the user data', () => {
       const user: User = { username: 'testuser', password: 'testpassword', email: "t@email.com", id: 1};
-      const expectedResponse = { response: 'Success' };
+      const expectedResponse = "Success";
 
       authService.signup(user).subscribe((response) => {
         expect(response).toEqual(expectedResponse);
