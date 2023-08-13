@@ -24,8 +24,8 @@ export class VideoService {
     return this.httpClient.get<VideoAttribute[]>(url);
   }
 
-  public deletePortfolioVideo(video: VideoAttribute): Observable<void> {
-    let url = `${environment.baseUrl}/content/${video.id}`;
+  public deletePortfolioVideo(videoId: number): Observable<void> {
+    let url = `${environment.baseUrl}/content/${videoId}`;
     return this.httpClient.delete<void>(url);
   }
 }

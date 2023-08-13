@@ -67,8 +67,8 @@ describe('VideoService', () => {
   describe('fetchPortfolioVideo', () => {
     it('should send a GET request to fetch portfolio videos', () => {
       const expectedVideos: VideoAttribute[] = [
-        { id: 1, videoName: 'Video 1', videoUrl: 'video1.mp4', bestFrames: [] },
-        { id: 2, videoName: 'Video 2', videoUrl: 'video2.mp4', bestFrames: [] },
+        { id: 1, videoName: 'Video 1', videoUrl: 'video1.mp4', bestFrames: [], thumbNail: 'url' },
+        { id: 2, videoName: 'Video 2', videoUrl: 'video2.mp4', bestFrames: [], thumbNail: 'url' },
       ];
 
       videoService.fetchPortfolioVideo().subscribe((videos) => {
@@ -109,10 +109,11 @@ describe('VideoService', () => {
         id: 1,
         videoName: 'Video 1',
         videoUrl: 'video1.mp4',
-        bestFrames: []
+        bestFrames: [],
+        thumbNail: ''
       };
 
-      videoService.deletePortfolioVideo(videoToDelete).subscribe((response) => {
+      videoService.deletePortfolioVideo(videoToDelete.id).subscribe((response) => {
         expect(response).toBeNull();
       });
 
@@ -127,11 +128,12 @@ describe('VideoService', () => {
         id: 1,
         videoName: 'Video 1',
         videoUrl: 'video1.mp4',
-        bestFrames: []
+        bestFrames: [],
+        thumbNail: ''
       };
       const errorMessage = "Resource with id - 1 is not found";
 
-      videoService.deletePortfolioVideo(videoToDelete).subscribe(
+      videoService.deletePortfolioVideo(videoToDelete.id).subscribe(
         () => {
           fail('Should have failed with an error');
         },

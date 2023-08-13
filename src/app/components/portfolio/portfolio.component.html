@@ -1,1 +1,16 @@
-<p>portfolio works!</p>
+<h1>Creator Portfolio</h1>
+
+<div class="gallery-container">
+  <div class="gallery-item" *ngFor="let media of videos">
+    <img [src]="media.thumbNail" alt="{{ media.videoName }}">
+    <span>{{ media.videoName }}</span>
+    <button (click)="delete(media)">Delete</button>
+  </div>
+</div>
+
+<div class="upload-block">
+  <h3>Upload more videos:</h3>
+  <label class="btn btn-bwm">
+    <input #videoInput type="file" accept="video/*" (change)="upload(videoInput)">
+  </label>
+</div>

@@ -5,6 +5,7 @@ import {HttpClientTestingModule, HttpTestingController} from "@angular/common/ht
 import {environment} from "../../environments/environment";
 import {JwtRequest} from "../dto/jwt-request";
 import {User} from "../models/user";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -12,7 +13,10 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+      ],
       providers: [AuthService],
     });
 

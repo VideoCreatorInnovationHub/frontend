@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {AuthService} from "./auth.service";
 import {HttpEvent, HttpHandler, HttpRequest} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {catchError, Observable, throwError} from "rxjs";
+import {Router} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,8 @@ import {Observable} from "rxjs";
 export class AuthInterceptorService {
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   /**
@@ -30,7 +33,17 @@ export class AuthInterceptorService {
       request = AuthInterceptorService.addTokenToRequest(request, token);
     }
 
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError((error) => {
+        if (error.status === 401) {
+          localStorage.clear();
+          Swal.fire("Session Timeout", "Please login again", "error").then(r => {
+            this.router.navigateByUrl('/login');
+          });
+        }
+        return throwError(error);
+      })
+    );
   }
 
   /**
