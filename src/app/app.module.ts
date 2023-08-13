@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent, data: { preload: true }},
   {path: 'about-us', component: AboutUsComponent, data: { preload: true }},
   {path: 'portfolio', canActivate: [AuthGuard], component: PortfolioComponent},
-  {path: '', component: LandingComponent, pathMatch: 'full'},
+  {path: '', component: PortfolioComponent, pathMatch: 'full'},
   {path: '**', redirectTo: 'login', pathMatch: 'full'}
 ];
 

@@ -4,13 +4,15 @@ import {User} from "../models/user";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {JwtRequest} from "../dto/jwt-request";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private router: Router) { }
 
   public signup(user: User) : Observable<string> {
     let url = `${environment.baseUrl}/auth/signup`;
@@ -26,5 +28,4 @@ export class AuthService {
     let url = `${environment.baseUrl}/auth/user_info`;
     return this.httpClient.get<User>(url, { withCredentials: true });
   }
-
 }
