@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {VideoService} from "../../services/video.service";
 import {VideoAttribute} from "../../models/video-attribute";
-import {HttpErrorResponse} from "@angular/common/http";
-import {AuthService} from "../../services/auth.service";
 import Swal from "sweetalert2";
-import {of} from "rxjs";
 import {Router} from "@angular/router";
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 class VideoSnippet {
@@ -21,14 +19,15 @@ export class PortfolioComponent implements OnInit {
 
   public videos: VideoAttribute[] = [];
   constructor(private videoService: VideoService,
-              private router: Router) { }
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.videoService.fetchPortfolioVideo().subscribe(
       (next) => {
         this.videos = next;
         this.videos.forEach((v) => {
-          v.thumbNail = this.randomFrame(v.bestFrames, v.bestFrames.length);
+          const frames = v.bestFrames.split("#");
+          v.thumbNail = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/jpeg;base64, ${this.randomFrame(frames, frames.length)}`);
         });
       },
       (error) => {

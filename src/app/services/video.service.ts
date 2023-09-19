@@ -15,8 +15,7 @@ export class VideoService {
     let url = `${environment.baseUrl}/content/upload`;
     const formData = new FormData();
     formData.append('video', video);
-
-    return this.httpClient.post(url, formData);
+    return this.httpClient.post(url, formData, { responseType: "text" });
   }
 
   public fetchPortfolioVideo(): Observable<VideoAttribute[]> {
