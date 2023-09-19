@@ -31,7 +31,7 @@ describe('VideoService', () => {
   describe('upload', () => {
     it('should send a POST request with the video file', () => {
       const file = new File([''], 'testVideo.mp4', { type: 'video/mp4' });
-      const expectedResponse = { status: 'success' };
+      const expectedResponse = 'success';
 
       videoService.upload(file).subscribe((response) => {
         expect(response).toEqual(expectedResponse);
@@ -67,8 +67,8 @@ describe('VideoService', () => {
   describe('fetchPortfolioVideo', () => {
     it('should send a GET request to fetch portfolio videos', () => {
       const expectedVideos: VideoAttribute[] = [
-        { id: 1, videoName: 'Video 1', videoUrl: 'video1.mp4', bestFrames: [], thumbNail: 'url' },
-        { id: 2, videoName: 'Video 2', videoUrl: 'video2.mp4', bestFrames: [], thumbNail: 'url' },
+        { id: 1, videoName: 'Video 1', videoUrl: 'video1.mp4', bestFrames: "f1", thumbNail: 'url' },
+        { id: 2, videoName: 'Video 2', videoUrl: 'video2.mp4', bestFrames: "f2", thumbNail: 'url' },
       ];
 
       videoService.fetchPortfolioVideo().subscribe((videos) => {
@@ -109,7 +109,7 @@ describe('VideoService', () => {
         id: 1,
         videoName: 'Video 1',
         videoUrl: 'video1.mp4',
-        bestFrames: [],
+        bestFrames: "f",
         thumbNail: ''
       };
 
@@ -128,7 +128,7 @@ describe('VideoService', () => {
         id: 1,
         videoName: 'Video 1',
         videoUrl: 'video1.mp4',
-        bestFrames: [],
+        bestFrames: "f",
         thumbNail: ''
       };
       const errorMessage = "Resource with id - 1 is not found";
