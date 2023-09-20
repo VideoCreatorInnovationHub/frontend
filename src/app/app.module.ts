@@ -17,6 +17,7 @@ import {FormsModule} from "@angular/forms";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, data: { preload: true }},
+  {path: 'home', component: LandingComponent, data: { preload: true }},
   {path: 'register', component: RegisterComponent, data: { preload: true }},
   {path: 'about-us', component: AboutUsComponent, data: { preload: true }},
   {path: 'portfolio', canActivate: [AuthGuard], component: PortfolioComponent},
